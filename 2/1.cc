@@ -12,7 +12,7 @@ auto meomoize(auto &&func) requires std::invocable<decltype(func), Args...> {
         itr != std::end(cache)) {
       return itr->second;
     }
-    auto res = func(args);
+    auto res = func(std::forward<Args>(args)...);
     cache[std::tuple{ std::forward<Args>(args)... }] = res;
     return res;
   };
