@@ -1,3 +1,5 @@
+#include <type_traits>
+#include <cstdlib>
 #include <iostream>
 #include <map>
 
@@ -18,14 +20,12 @@ template<typename... Args> auto memoize(std::invocable<Args...> auto &&func) {
   };
 }
 
-auto func(int i, int c) {
-  std::cout << i << " " << c << "\n";
-  return i + c;
-}
-
 int main() {
   using namespace std;
-  auto mem_func = memoize<int, int>(func);
-  cout << mem_func(1, 2) << endl;
-  cout << mem_func(1, 2) << endl;
+  auto mem_rand = memoize<>(rand);
+  std::cout << mem_rand() << std::endl;
+  std::cout << mem_rand() << std::endl;
+  std::cout << mem_rand() << std::endl;
+  std::cout << mem_rand() << std::endl;
+  std::cout << mem_rand() << std::endl;
 }
